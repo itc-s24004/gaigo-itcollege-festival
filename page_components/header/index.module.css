@@ -1,0 +1,46 @@
+.header {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+
+    display: flex;
+
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.leftSection {
+    flex: 1;
+}
+
+.title {
+    color: orange;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.nav {
+    margin-top: 0.5rem;
+}
+
+.navList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1rem;
+}
+
+.navItem {
+    font-size: 1rem;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.navItem:hover {
+    text-decoration: underline;
+}

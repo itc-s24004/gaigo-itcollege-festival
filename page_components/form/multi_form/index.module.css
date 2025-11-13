@@ -1,0 +1,18 @@
+.multi_form {
+    display: flexbox;
+    flex-direction: column;
+
+    /* form {
+        border-top: none;
+    } */
+    form:first-child {
+        border-bottom: none;
+    }
+    form:not(:first-of-type):not(:last-of-type) {
+        border-top: none;
+        border-bottom: none;
+    }
+    form:last-child {
+        border-top: none;
+    }
+}

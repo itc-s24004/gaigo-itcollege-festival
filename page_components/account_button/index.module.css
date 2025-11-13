@@ -1,0 +1,18 @@
+.accountButton {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+}
+
+.icon {
+    border-radius: 20%;
+    outline: 2px solid #525252;
+}
+
+.icon.alert {
+    outline: 2px solid rgb(72, 167, 255);
+}

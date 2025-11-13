@@ -1,0 +1,28 @@
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+.tree {
+    padding-left: 20px;
+    li:not(:has(ul)) a {
+        color: blue;
+    }
+    li:hover {
+        background-color: white;
+    }
+}
+
+.tree:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
