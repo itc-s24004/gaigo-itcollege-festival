@@ -13,8 +13,8 @@ export function ImageListView({ imageUrls, onImageSelect, size = 400, customAttr
     return (
         <div className={styles.image_container} {...customAttributes}>
             {
-                imageUrls.map((url) => (
-                    <div className={styles.image_wapper} key={url}>
+                imageUrls.map((url, index) => (
+                    <div className={styles.image_wapper} key={index}>
                         <Image src={url} alt="Image" width={size} height={size} onClick={() => {
                             onImageSelect?.(url);
                         }} />

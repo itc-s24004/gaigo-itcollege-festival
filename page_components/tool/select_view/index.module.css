@@ -1,0 +1,19 @@
+.selectView {
+    width: 100%;
+    padding: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    background-color: white;
+}
+
+.option {
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.option.selected {
+    outline: lightblue 4px solid;
+}

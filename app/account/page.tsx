@@ -1,11 +1,18 @@
 import { getUserInfo } from "@/libs/user";
-import { SigninBtn } from "@/page_components/auth";
 import { signInAction, signOutAction } from "@/page_components/auth/action";
 import { GoogleAuthBtn } from "@/page_components/auth/google";
 import { MultiForm } from "@/page_components/form/multi_form";
 import { PlainForm } from "@/page_components/form/plain";
 
+
+export const metadata = {
+    title: "アカウント管理",
+    description: "ユーザーアカウントの管理ページ",
+};
+
+
 export default async function Page() {
+
     const userInfo = await getUserInfo();
 
     const mainFrame = userInfo.isLoggedIn ? (
@@ -43,7 +50,7 @@ export default async function Page() {
             />
 
             <PlainForm inputs={[]} customFormAttributes={{action: signOutAction}}>
-                <GoogleAuthBtn type="submit" text="サインアウト" />
+                <GoogleAuthBtn type="submit" text="ログアウト" />
             </PlainForm>
         </MultiForm>
     ) : userInfo.isGoogleLogin ? (
@@ -87,9 +94,9 @@ export default async function Page() {
         >
             <GoogleAuthBtn type="submit" text="Googleアカウントでサインイン" />
         </PlainForm>
-    )
+    );
     
     return (
         mainFrame
-    )
+    );
 }

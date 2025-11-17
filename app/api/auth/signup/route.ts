@@ -1,8 +1,8 @@
-import { addUser } from "@/libs/db";
+import { db_addUser } from "@/libs/db/users";
 import { getUserInfo } from "@/libs/user";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
     const userInfo = await getUserInfo();
     const user = userInfo.user;
 
@@ -30,9 +30,9 @@ export async function POST(req: Request) {
         { status: 400 }
     );
 
-    const userId = await addUser(userInfo.email, nickName);
+    const userId = await db_addUser(userInfo.email, nickName);
     console.log("New user registered:", userId);
     
-    return NextResponse.redirect(new URL("/account", new URL(req.url).origin));
+    return NextResponse.redirect(new URL("/account", req.nextUrl.origin));
 
 }

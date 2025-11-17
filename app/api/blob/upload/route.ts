@@ -1,12 +1,10 @@
+import { uploadBlob } from "@/libs/blob";
 import { getUserInfo } from "@/libs/user";
-import { put } from "@vercel/blob";
 import { NextRequest, NextResponse } from "next/server";
-import path from "path";
 
 
 
 export async function POST(req: NextRequest) {
-    console.log("Accessing protected blob endpoint");
     const user = (await getUserInfo()).user;
     if (!user || !user.isStaff) {
         return NextResponse.json(
@@ -27,12 +25,8 @@ export async function POST(req: NextRequest) {
             { status: 400 }
         );
     }
-    console.log("Received file:", file);
-    const uid = crypto.randomUUID();
-    const result = await put(path.join(user.id, uid, file.name), await file.arrayBuffer(), {
-        access: "public"
-    });
-    console.log("File uploaded to blob storage:", result);
+
+    const result = await uploadBlob(user, file);
 
     return NextResponse.json(result);
 }

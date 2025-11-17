@@ -1,9 +1,9 @@
-import { db_user, db_userLevel } from "./db";
+import { db_user, db_user_id, db_user_level } from "./db/db.type";
 
 
 export class UserAccount {
-    #id: string;
-    #level: db_userLevel;
+    #id: db_user_id;
+    #level: db_user_level;
 
     #nickName: string;
     #email: string;
@@ -41,12 +41,12 @@ export class UserAccount {
 
 
     get isAdmin() {
-        return this.#level === db_userLevel.admin;
+        return this.#level === db_user_level.admin;
     }
 
 
     get isSuperAdmin() {
-        return this.#level === db_userLevel.superAdmin;
+        return this.#level === db_user_level.superAdmin;
     }
 
 }

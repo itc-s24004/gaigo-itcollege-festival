@@ -2,9 +2,7 @@ import { getUserInfo } from "@/libs/user";
 import { PageContent } from "./content";
 
 export default async function Page() {
-    const userInfo = await getUserInfo();
-
-    const user = userInfo.user;
+    const user = (await getUserInfo()).user;
 
     if (user) {
         return (

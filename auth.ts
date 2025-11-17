@@ -13,23 +13,11 @@ export const na = NextAuth({
     ],
     callbacks: {
         signIn: async ({ user, account, profile, credentials }) => {
-            
-            // const name = user.name || "anonymous";
-            // const email = user.email;
-
-            // if (!email) {
-            //     return false;
-            // }
-            // addUser(email, name);
-
-
 
             return true;
         },
         session: async ({ session, user, token }) => {
-            // console.log(session)
-            // console.log(user)
-            // console.log(token)
+            
             return session
         }
     }

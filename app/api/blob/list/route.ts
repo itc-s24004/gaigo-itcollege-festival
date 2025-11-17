@@ -8,6 +8,7 @@ export async function GET(req: Request) {
     if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const url = new URL(req.url);
+    const dir = url.searchParams.get("dir");
     const cursor = url.searchParams.get("cursor");
     const limit = Math.max(
         1,
@@ -15,6 +16,6 @@ export async function GET(req: Request) {
         50
     ));
 
-    const result = await getUserBlob(user.id, cursor ?? undefined, limit);
+    const result = await getUserBlob(user.id, dir ?? undefined, cursor ?? undefined, limit);
     return NextResponse.json(result);
 }

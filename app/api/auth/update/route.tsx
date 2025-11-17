@@ -22,6 +22,8 @@ export async function POST(req: Request) {
         { status: 400 }
     );
 
+
+    
     return NextResponse.json(
         {
             message: "Nickname updated successfully."

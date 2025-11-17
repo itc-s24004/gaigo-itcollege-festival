@@ -1,45 +1,24 @@
 import Link from "next/link";
 import styles from "./page.module.css";
+import { db_getFestivalWithImageByID } from "@/libs/db/festivals";
+import { FestivalPoster } from "@/page_components/poster/festival";
+import RootLayout from "@/page_components/_layout/layout";
+import { db_getSiteSettings, db_siteSettingsToJson } from "@/libs/db/site_settings";
+import { SITE_SETTINGS } from "@/site_settings";
 
 export default async function Home() {
+    const site_settings = await db_getSiteSettings();
+    const settings = db_siteSettingsToJson<SITE_SETTINGS>(site_settings);
+    const festival = await db_getFestivalWithImageByID(settings.festival);
+
+
     return (
-        <div>
-            <div className={styles.titleContainer}>
-                <h1 className={styles.title}>トップページ</h1>
-                <h2>テスト用リンク</h2>
-            </div>
-            <ul className={styles.tree}>
-                <li>
-                    <Link href="/">/ | トップページ</Link>
+        <RootLayout params={Promise.resolve({festival_id: settings.festival})}>
 
-                    <ul className={styles.tree}>
-                        <li>
-                            <Link href="/account">/account | アカウント</Link>
-                            <ul className={styles.tree}>
-                                <li><Link href="/account/contents">/account/contents | アップロードしたコンテンツ</Link></li>
-                            </ul>
-                        </li>
-
-                        <li>
-                            /events | イベント
-                            <ul className={styles.tree}>
-                                <li><Link href="/events/food">/events/food | 食事</Link></li>
-                                <li><Link href="/events/stage">/events/stage | ステージ</Link></li>
-                            </ul>
-                        </li>
-                        
-                        <li>
-                            <Link href="/test">/test | テスト</Link>
-                            <ul className={styles.tree}>
-                                <li><Link href="/test/select">/test/select | データ選択</Link></li>
-                                <li><Link href="/test/upload">/test/upload | ファイルアップロード</Link></li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                    
-                </li>
-            </ul>
-        </div>
+            {
+                festival && <FestivalPoster key={festival.id} data={festival} customAttributes={{style: {maxWidth: "60%", margin: "0 auto", border: "none", boxShadow: "none"}}}/>
+            }
+            
+        </RootLayout>
     );
 }

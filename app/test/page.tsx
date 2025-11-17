@@ -1,8 +1,8 @@
 import { getAllBlob } from "@/libs/blob";
-import { getData, getEnums, getTables, getUsers,  } from "../../libs/db";
 
 import styles from "./page.module.css";
 import Link from "next/link";
+import { db_getUsers } from "@/libs/db/users";
 
 
 
@@ -16,8 +16,7 @@ import Link from "next/link";
 
 
 export default async function Page() {
-    const data = await getData();
-    const users = await getUsers();
+    const users = await db_getUsers();
     const blobs = await getAllBlob();
     return (
         <div>
@@ -29,10 +28,6 @@ export default async function Page() {
             </div>
             <h1>Test Page</h1>
             <div className={styles.frame}>
-                <div className={styles.tab}>
-                    <h2>Database Schemas:</h2>
-                    <pre>{JSON.stringify(data, null, 2)}</pre>
-                </div>
 
                 <div className={styles.tab}>
                     <h2>Users:</h2>

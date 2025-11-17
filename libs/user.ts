@@ -1,6 +1,6 @@
 import { auth } from "@/auth"
-import { getUserByEmail } from "./db";
 import { UserAccount } from "./data";
+import { db_getUserByEmail } from "./db/users";
 
 
 export class UserInfo {
@@ -9,7 +9,7 @@ export class UserInfo {
         return this.#email;
     }
     
-    #user: UserAccount | null = null;
+    #user: UserAccount | undefined = undefined;
     get user() {
         return this.#user;
     }
@@ -28,7 +28,7 @@ export class UserInfo {
         return this.#email != null && this.#user != null;
     }
 
-    constructor(email: string | null, icon: string | null, user: UserAccount | null) {
+    constructor(email: string | null, icon: string | null, user: UserAccount | undefined) {
         this.#email = email;
         this.#icon = icon;
         this.#user = user;
@@ -39,9 +39,9 @@ export class UserInfo {
 export async function getUserInfo() {
     const session = await auth();
     const email = session?.user?.email || null;
-    const user = email ? await getUserByEmail(email) : null;
+    const user = email ? await db_getUserByEmail(email) : null;
     const icon = session?.user?.image || null;
 
-    return new UserInfo(email, icon, user ? new UserAccount(user) : null);
+    return new UserInfo(email, icon, user ? new UserAccount(user) : undefined);
 
 }
