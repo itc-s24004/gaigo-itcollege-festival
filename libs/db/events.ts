@@ -26,7 +26,7 @@ export async function db_getEventsWithImage() {
     const data = await sql.query(`
         SELECT 
             events.*,
-            uc.url AS image_url 
+            user_contents.url AS image_url 
         FROM 
             events 
         LEFT JOIN 
@@ -51,7 +51,7 @@ export async function db_getEventWithImageByID(eventId: db_event_id) {
     const data = await sql.query(`
         SELECT 
             events.*,
-            uc.url AS image_url 
+            user_contents.url AS image_url 
         FROM 
             events 
         LEFT JOIN 
@@ -97,7 +97,7 @@ export async function db_getEventsWithImageByOwnerID(ownerId: db_user_id) {
     const data = await sql.query(`
         SELECT 
             events.*,
-            uc.url AS image_url 
+            user_contents.url AS image_url 
         FROM 
             events 
         LEFT JOIN 

@@ -15,3 +15,9 @@ export async function db_getEnums() {
     const data = await sql`SELECT * FROM pg_enum`;
     return data;
 }
+
+
+export type db_default_query = {
+    limit?: number;
+    offset?: number;
+}

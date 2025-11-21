@@ -6,5 +6,5 @@ export type site_setting = {
 
 
 export type SITE_SETTINGS = {
-    festival: db_festival_id;
+    current_festival: db_festival_id;
 }

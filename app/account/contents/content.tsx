@@ -1,6 +1,7 @@
 "use client";
 
 import { api_getUserContents } from "@/app/api/user_contents/list/client";
+import { PlainButton } from "@/page_components/button/plain";
 import { ImageListView } from "@/page_components/tool/image_view";
 import { useState } from "react";
 
@@ -24,9 +25,16 @@ export function PageContent() {
         <div>
             <h1>Account Contents</h1>
             <ImageListView imageUrls={images} />
-            <button disabled={!moreImage} onClick={getMoreImages}>
+            <PlainButton
+                attributes={
+                    {
+                        disabled: !moreImage,
+                        onClick: getMoreImages
+                    }
+                }
+            >
                 {moreImage ? "もっと画像を読み込む" : "これ以上画像はありません"}
-            </button>
+            </PlainButton>
         </div>
     );
 }

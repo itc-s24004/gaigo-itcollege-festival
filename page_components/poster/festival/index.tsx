@@ -13,7 +13,7 @@ export function FestivalPoster({ data, customAttributes }: Options) {
     return (
         <div className={styles.poster} {...customAttributes}>
             <h2 className={styles.posterTitle}>{data.name}</h2>
-            {data.image_url && <Image className={styles.posterImage} src={data.image_url ?? "/default/image.png"} alt={data.name} width={1000} height={600} />}
+            <Image className={styles.posterImage} src={data.image_url ?? "/default/image.png"} alt={data.name} width={1000} height={600} />
             <p className={styles.posterDescription}>{data.description}</p>
         </div>
     );

@@ -20,7 +20,7 @@ export const Header = ({festival_id, isLoggedIn, icon}: {festival_id: db_festiva
             <nav className={ menuOpen ? `${styles.nav} ${styles.navOpen}` : styles.nav}>
                 <ul className={styles.navList}>
                     <Link href="/"><li className={styles.navItem}>ホーム</li></Link>
-                    <Link href={`/${festival_id}/event`}><li className={styles.navItem}>イベント一覧</li></Link>
+                    <Link href={`/festival/${festival_id}/event`}><li className={styles.navItem}>イベント一覧</li></Link>
                     <Link href="/archive"><li className={styles.navItem}>過去の祭り</li></Link>
                     <Link href="/about"><li className={styles.navItem}>このサイトについて</li></Link>
                 </ul>

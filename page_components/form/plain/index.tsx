@@ -1,5 +1,6 @@
 "use client";
 
+import { PlainButton } from "@/page_components/button/plain";
 import styles from "./index.module.css";
 import React from "react";
 
@@ -7,11 +8,12 @@ import React from "react";
 
 type Options = {
     title?: string;
-    inputs: (
+    inputs?: (
         { label: string, attr: React.InputHTMLAttributes<HTMLInputElement>, type: "input" } |
         { label: string, attr: React.InputHTMLAttributes<HTMLTextAreaElement>, type:  "textarea" } |
         { label: string, attr: React.InputHTMLAttributes<HTMLSelectElement>, type: "select", options: { value: string; label: string }[] } |
         { label: string, type: "custom_input", node: React.ReactNode } |
+        { label: string, type: "label"} |
         { type: "custom", node: React.ReactNode}
     )[];
     submitLabel?: string;
@@ -23,7 +25,7 @@ type Options = {
     children?: React.ReactNode;
 };
 
-export function PlainForm({ title, inputs, submitLabel, submitCallback, customSubmitButtonAttributes, customFormAttributes, children }: Options) {
+export function PlainForm({ title, inputs=[], submitLabel, submitCallback, customSubmitButtonAttributes, customFormAttributes, children }: Options) {
 
     return (
         <form className={styles.form} {...customFormAttributes} onSubmit={(e) => {
@@ -64,7 +66,10 @@ export function PlainForm({ title, inputs, submitLabel, submitCallback, customSu
                                 ) : input.type === "custom_input" ? (
                                     input.node
 
-                                ) : null
+                                ) : input.type === "label" ? (
+                                    <></>
+
+                                ) : <></>
                             }
                         </label>
                     </div>
@@ -72,7 +77,19 @@ export function PlainForm({ title, inputs, submitLabel, submitCallback, customSu
                 )
             ))}
             {children}
-            {submitLabel && <button type="submit" className={styles.form_button} {...customSubmitButtonAttributes}>{submitLabel}</button>}
+            {
+                submitLabel &&
+                <PlainButton
+                    attributes={
+                        {
+                            type: "submit",
+                            ...customSubmitButtonAttributes
+                        }
+                    }
+                >
+                    {submitLabel}
+                </PlainButton>
+            }
         </form>
     )
 }

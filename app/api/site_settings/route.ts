@@ -1,17 +1,25 @@
-import { db_festival_id } from "@/libs/db/db.type";
+import { checkApiPermission } from "@/libs/api_permission";
+import { db_user_level } from "@/libs/db/db.type";
 import { db_setSiteSetting } from "@/libs/db/site_settings";
 import { getUserInfo } from "@/libs/user";
+import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+
+export async function PUT(req: Request) {
     const user = (await getUserInfo()).user;
 
-    if (!user) return new Response("Unauthorized", { status: 401 });
-    if (!user.isAdmin && !user.isSuperAdmin) return new Response("Forbidden", { status: 403 });
+    return checkApiPermission( async () => {
+        
+        const form = await req.formData();
+        const key = form.get("key") as string;
+        const value = form.get("value") as string | number | boolean | null;
 
-    const form = await req.formData();
-    const festival_id = form.get("festival_id") as db_festival_id | null;
+        if (value === null) return NextResponse.json({ message: "Invalid value" }, { status: 400 });
 
-    if (festival_id) await db_setSiteSetting("festival_id", festival_id);
+        const ok = await db_setSiteSetting(key, value);
 
-    return new Response("Site settings updated", { status: 200 });
+        if (!ok) return NextResponse.json({ message: "Failed to update site setting" }, { status: 500 });
+
+        return NextResponse.json({ message: "Site setting updated successfully" }, { status: 200 });
+    }, false, user, db_user_level.admin);
 }

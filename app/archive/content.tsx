@@ -15,7 +15,7 @@ export function PageContent({ festivals }: PageContentProps) {
                 festivals.map((festival, index) => (
                     {
                         element: (
-                            <Link key={index} href={`/${festival.id}`}>
+                            <Link key={index} href={`/festival/${festival.id}`}>
                                 <FestivalPoster data={festival} customAttributes={{style: {border: "none", boxShadow: "none", maxWidth: "300px"}}}/>
                             </Link>
                         )

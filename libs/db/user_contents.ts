@@ -1,10 +1,14 @@
-import { off } from "process";
 import { sql } from "./db";
-import { db_user_content, db_user_id } from "./db.type";
+import { db_user_content, db_user_content_id, db_user_id } from "./db.type";
 
 export async function db_addUserContent(user_id: db_user_id, url: string, type: string) {
     const data = await sql.query("INSERT INTO user_contents (user_id, url, type) VALUES ($1, $2, $3) RETURNING *", [user_id, url, type]) as db_user_content[];
     return data[0];
+}
+
+export async function db_getUserContentByID(id: db_user_content_id) {
+    const data = await sql.query("SELECT * FROM user_contents WHERE id = $1", [id]) as db_user_content[];
+    return data.length > 0 ? data[0] : null;
 }
 
 export async function db_getUserContents(user_id: db_user_id, type?: string, limit?: number, offset?: number) {

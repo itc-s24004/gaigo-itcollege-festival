@@ -14,8 +14,11 @@ export async function GET(req: NextRequest) {
     const raw_offset = searchParams.get("offset");
     const type = searchParams.get("type");
 
-    const limit = raw_limit ? Math.min(20, Math.max(parseInt(raw_limit), 1)) : 20;
+    const limit = raw_limit ? Math.min(20, Math.max(parseInt(raw_limit), 1)) : 5;
     const offset = raw_offset ? Math.max(parseInt(raw_offset), 0) : 0;
+
+
+    console.log(raw_limit, raw_offset, type, limit, offset);
 
     const contents = await db_getUserContents(user.id, type ?? undefined, limit, offset);
 

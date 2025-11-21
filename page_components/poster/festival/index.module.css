@@ -2,14 +2,13 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 16px;
-    /* margin: 16px; */
     max-width: 90%;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .posterTitle {
-    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-size: 2em;
     font-weight: bold;
     margin-bottom: 8px;
 }
@@ -22,12 +21,13 @@
 }
 
 .posterDescription {
-    font-size: clamp(1.2rem, 2vw, 2rem);
+    font-size: 1.2em;
     color: #555;
 
-    overflow-wrap: break-word;
+    overflow-wrap: nowrap;
 
-    word-wrap: break-word;
+    word-wrap: nowrap;
+    white-space: pre-wrap;
 }
 
 @media (min-width: 768px) {

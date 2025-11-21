@@ -11,7 +11,7 @@ type PageContentProps = {
     festivals: db_festival_with_image[];
 }
 export function PageContent({ settings, festivals }: PageContentProps) {
-    const selectedFestival = festivals.findIndex((fes) => fes.id === settings.festival);
+    const selectedFestival = festivals.findIndex((fes) => fes.id === settings.current_festival);
     
 
 
@@ -24,13 +24,10 @@ export function PageContent({ settings, festivals }: PageContentProps) {
                         festivals.map((festival, index) => (
                             {
                                 element: (
-                                    <Link href={`/admin/${festival.id}`}>
+                                    <Link href={`/festival/${festival.id}/editor`}>
                                         <FestivalPoster key={index} data={festival} customAttributes={{style: { boxShadow: "none"}}}/>
                                     </Link>
-                                ),
-                                // onSelect: () => {
-                                //     setSelectedFestival(selectedFestival === index ? null : index);
-                                // }
+                                )
                             }
                         ))
                     }

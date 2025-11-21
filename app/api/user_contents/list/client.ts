@@ -6,7 +6,7 @@ export async function api_getUserContents(type?: string, length?: number, offset
     if (typeof window === "undefined") return [];
     const url = new URL(`/api/user_contents/list`, window.location.origin);
 
-    if (length !== undefined) url.searchParams.append("length", length.toString());
+    if (length !== undefined) url.searchParams.append("limit", length.toString());
     if (offset !== undefined) url.searchParams.append("offset", offset.toString());
     if (type !== undefined) url.searchParams.append("type", type);
 

@@ -47,6 +47,7 @@ export type db_festival = {
     description: string;
     image_id?: db_user_content_id;
     is_archived: boolean;
+    created_at: string;
 }
 // フェスティバル情報▲
 
@@ -109,5 +110,23 @@ export type db_user_content = {
 
     url: string;
     type: string;
+    created_at: string;
 }
 // ユーザーコンテンツ▲
+
+
+
+// 投稿情報▼
+export type db_post_id = string & {__brand: "db_post_id"};
+
+export type db_post = {
+    id: db_post_id;
+    user_id: db_user_id;
+    event_id?: db_event_id;
+
+    content: string;
+    image_id?: db_user_content_id;
+    created_at: string;
+    is_deleted: boolean;
+}
+// 投稿情報▲

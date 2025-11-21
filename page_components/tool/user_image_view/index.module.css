@@ -1,0 +1,29 @@
+.user_contents_view_container {
+    width: 100%;
+}
+
+.action_buttons_container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+
+    >button{
+        flex: 1;
+    }
+
+    >:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right: 1px solid rgb(53, 53, 53);
+    }
+    >:not(:first-of-type):not(:last-of-type) {
+        border-radius: 0;
+        border-right: 1px solid rgb(53, 53, 53);
+        border-left: 1px solid rgb(53, 53, 53);
+    }
+    >:last-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-left: 1px solid rgb(53, 53, 53);
+    }
+}

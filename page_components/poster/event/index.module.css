@@ -3,24 +3,26 @@
     border-radius: 8px;
     padding: 16px;
     margin: auto;
-    max-width: 90%;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 
 .posterTitle {
-    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-size: 1.5em;
+    white-space: no-wrap;
     font-weight: bold;
 }
 
 .posterDescription {
-    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    font-size: 1.2em;
     color: #555;
     line-height: 1.6;
 }
 
 .posterImage {
     object-fit: contain;
-    max-height: 150px;
+    width: 320px;
+    max-height: 180px;
+    margin: 0 auto;
 }

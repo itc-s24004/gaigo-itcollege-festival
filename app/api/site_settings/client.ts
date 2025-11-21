@@ -1,14 +1,16 @@
 "use client";
 
-export async function api_setSiteSettings(key: string, value: string | number | boolean): Promise<boolean> {
+import { site_setting, SITE_SETTINGS } from "@/site_settings";
+
+export async function api_setSiteSettings<T extends site_setting = SITE_SETTINGS, K extends keyof T = keyof T>(key: K, value: T[K]): Promise<boolean> {
     if (typeof window === "undefined") return false;
 
     const url = new URL("/api/site_settings", window.location.origin);
     const form = new FormData();
-    form.append(key, value.toString());
+    form.append(key.toString(), value.toString());
 
     return await fetch(url, {
-        method: "POST",
+        method: "PUT",
         body: form
     })
     .then((res) => res.ok)

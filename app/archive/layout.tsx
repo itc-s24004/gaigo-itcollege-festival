@@ -6,7 +6,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
     const settings = await db_getSiteSettings();
     const site_settings = db_siteSettingsToJson<SITE_SETTINGS>(settings);
     return (
-        <RootLayout params={Promise.resolve({festival_id: site_settings.festival})}>
+        <RootLayout params={Promise.resolve({festival_id: site_settings.current_festival})}>
             {children}
         </RootLayout>
     );
