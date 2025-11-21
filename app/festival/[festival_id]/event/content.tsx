@@ -25,7 +25,6 @@ export function PageContent({ events, showEntryPage }: PageContentProps) {
                         }
                     ))
                 }
-                selected={[]}
             />
             {showEntryPage && <Link href="./event/entry">イベント参加申請ページへ</Link>}
         </div>

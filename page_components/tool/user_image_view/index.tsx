@@ -74,7 +74,7 @@ export function UserContentsView({ customOptions = [], defaultSelected = [], mul
 
             <SelectView
                 options={
-                    allImages.map((content, i) => ({
+                    allImages.map((content) => ({
                         element: (
                             <Image src={content.url} alt={""} width={200} height={200} />
                         )
@@ -123,7 +123,7 @@ export function UserContentsView({ customOptions = [], defaultSelected = [], mul
                 {
                     canUpload &&
                     <button className={styles.action_buttons} type="button"
-                        onClick={(ev) => {
+                        onClick={() => {
                             if (uploadAction) return uploadAction();
                             setUpload(true)
                         }}
@@ -150,7 +150,6 @@ export function UserContentsView({ customOptions = [], defaultSelected = [], mul
                             const result = await api_uploadUserContent(file);
                             if (result) {
                                 alert("アップロード成功: " + result.content.url);
-                                console.log(result.content);
                                 setUploadedImages([...uploadedImages, result.content]);
                                 setLoadedImages([...loadedImages, result.content]);
                                 setUpload(false);
@@ -210,7 +209,6 @@ export function UserImageView( {  customOptions = [], defaultSelected = [], mult
     const [isloading, setIsLoading] = useState<boolean>(false);
     
     async function getMoreImages() {
-        console.log("getMoreImages called");
         if (!moreImage || isloading) return;
         setIsLoading(true);
         const result = await api_getUserContents("image", 5, allImages.length - defaultSelected.length - customOptions.length - uploadedImages.length);
@@ -221,7 +219,6 @@ export function UserImageView( {  customOptions = [], defaultSelected = [], mult
         setIsLoading(false);// 終了
     }
     if (firstLoad) {
-        console.log("first load");
         setFirstLoad(false);
         getMoreImages();
 
@@ -245,7 +242,7 @@ export function UserImageView( {  customOptions = [], defaultSelected = [], mult
 
             <SelectView
                 options={
-                    allImages.map((content, i) => ({
+                    allImages.map((content) => ({
                         element: (
                             <Image src={content.url} alt={""} width={200} height={200} />
                         ),
@@ -278,6 +275,7 @@ export function UserImageView( {  customOptions = [], defaultSelected = [], mult
             <div className={styles.action_buttons_container}>
                 <PlainButton
                     attributes={{
+                        type: "button",
                         disabled: !moreImage || isloading,
                         onClick: getMoreImages
                     }}
@@ -288,6 +286,7 @@ export function UserImageView( {  customOptions = [], defaultSelected = [], mult
                     canReload &&
                     <PlainButton
                         attributes={{
+                            type: "button",
                             disabled: isloading,
                             onClick: () => reload()
                         }}
@@ -300,7 +299,8 @@ export function UserImageView( {  customOptions = [], defaultSelected = [], mult
                     canUpload &&
                     <PlainButton
                         attributes={{
-                            onClick: (ev) => {
+                            type: "button",
+                            onClick: () => {
                                 setUpload(true)
                             }
                         }}
@@ -330,7 +330,6 @@ export function UserImageView( {  customOptions = [], defaultSelected = [], mult
                     const result = await api_uploadUserContent(file);
                     if (result) {
                         alert("アップロード成功: " + result.content.url);
-                        console.log(result.content);
                         setUploadedImages([...uploadedImages, result.content]);
                         setLoadedImages([...loadedImages, result.content]);
                         setUpload(false);
@@ -338,6 +337,11 @@ export function UserImageView( {  customOptions = [], defaultSelected = [], mult
                         alert("アップロード失敗");
                     }
                 }}
+                customFormAttributes={
+                    {
+                        onClick: (ev) => ev.stopPropagation()
+                    }
+                }
             />
         </FillScreen>
         : null

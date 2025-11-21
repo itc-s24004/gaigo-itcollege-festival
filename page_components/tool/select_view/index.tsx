@@ -77,10 +77,10 @@ type SelectViewProps = {
     }[];
     onSelect?: (index: number) => void;
     optionGenerator?: (index: number) => React.HTMLAttributes<HTMLDivElement>;
-    selected: number[];
+    selected?: number[];
     customAttributes?: React.HTMLAttributes<HTMLDivElement>;
 }
-export function SelectView({ options, onSelect, optionGenerator, selected, customAttributes }: SelectViewProps) {
+export function SelectView({ options, onSelect, optionGenerator, selected=[], customAttributes }: SelectViewProps) {
     return (
         <div className={styles.selectView} {...customAttributes}>
             {

@@ -16,13 +16,12 @@ export function PageContent({ festivals }: PageContentProps) {
                     {
                         element: (
                             <Link key={index} href={`/festival/${festival.id}`}>
-                                <FestivalPoster data={festival} customAttributes={{style: {border: "none", boxShadow: "none", maxWidth: "300px"}}}/>
+                                <FestivalPoster data={festival} customAttributes={{style: {boxShadow: "none", maxWidth: "300px"}}}/>
                             </Link>
                         )
                     }
                 ))
             }
-            selected={[]}
         />
     );
 }

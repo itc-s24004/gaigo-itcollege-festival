@@ -13,7 +13,6 @@ export async function POST(req: Request) {
         const description = form.get("description") as string | null;
         const image_id = form.get("image_id") as db_user_content_id | null;
 
-        console.log({ name, description, image_id });
 
         if (!name || !description) return NextResponse.json(
             {
@@ -23,7 +22,6 @@ export async function POST(req: Request) {
         );
 
         const result = await db_addFestival(name, description, image_id ?? undefined);
-        console.log(result);
         
         return NextResponse.json({ festival: result });
     }, true, user, db_user_level.admin);

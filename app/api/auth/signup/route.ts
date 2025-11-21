@@ -31,7 +31,6 @@ export async function POST(req: NextRequest) {
     );
 
     const userId = await db_addUser(userInfo.email, nickName);
-    console.log("New user registered:", userId);
     
     return NextResponse.redirect(new URL("/account", req.nextUrl.origin));
 

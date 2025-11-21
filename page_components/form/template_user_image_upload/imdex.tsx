@@ -4,8 +4,9 @@ import { ImageListView } from "@/page_components/tool/image_view";
 
 type Options = {
     onSubmit?: (formData: FormData) => Promise<void>;
+    customFormAttributes?: React.FormHTMLAttributes<HTMLFormElement>;
 }
-export function Template_Form_ImageUpload({ onSubmit }: Options) {
+export function Template_Form_ImageUpload({ onSubmit, customFormAttributes }: Options) {
     const [selectedImage, setSelectedImage] = useState<string[]>([]);
     return (
         <PlainForm
@@ -33,13 +34,7 @@ export function Template_Form_ImageUpload({ onSubmit }: Options) {
             ]}
             submitLabel="アップロード"
             submitCallback={onSubmit}
-            customFormAttributes={
-                {
-                    onClick: (ev) => {
-                        ev.stopPropagation();
-                    }
-                }
-            }
+            customFormAttributes={customFormAttributes}
         >
         </PlainForm>
     );
