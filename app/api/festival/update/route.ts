@@ -13,7 +13,7 @@ export async function PUT(request: Request) {
         const name = form.get("name");
         const description = form.get("description");
         const image_id = form.get("image_id") as db_user_content_id | undefined;
-        const is_archived = form.get("is_archived") === "true";
+        const is_archived = form.get("is_archived") as string === "on";
 
         if (typeof festival_id !== "string" || typeof name !== "string" || typeof description !== "string") return NextResponse.json({ error: "Bad Request" }, { status: 400 });
 

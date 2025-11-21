@@ -69,6 +69,22 @@ export async function db_getArchivedFestivals() {
 }
 
 
+export async function db_getArchivedFestivalsWithImage() {
+    const data = await sql.query(`
+        SELECT 
+            festivals.*,
+            user_contents.url AS image_url 
+        FROM 
+            festivals 
+        LEFT JOIN 
+            user_contents ON festivals.image_id = user_contents.id
+        WHERE 
+            festivals.is_archived = TRUE
+    `) as db_festival_with_image[];
+    return data;
+}
+
+
 
 export async function db_updateFestival(festivalId: db_festival_id, name: string, description: string, is_archived: boolean, image_id?: db_user_content_id) {
     return await sql.query("UPDATE festivals SET name = $1, description = $2, is_archived = $3, image_id = $4 WHERE id = $5 RETURNING *", [name, description, is_archived, image_id, festivalId]) as db_festival[];
