@@ -19,6 +19,8 @@ export async function db_getFestivals() {
             *
         FROM 
             festivals 
+        ORDER BY
+            festivals.created_at DESC
     `) as db_festival_with_image[];
     return data;
 }
@@ -33,14 +35,20 @@ export async function db_getFestivalsWithImage() {
             festivals 
         LEFT JOIN 
             user_contents ON festivals.image_id = user_contents.id
+        ORDER BY
+            festivals.created_at DESC
     `) as db_festival_with_image[];
     return data;
 }
 
 
 export async function db_getFestivalByID(festivalId: db_festival_id) {
-    const data = await sql.query("SELECT * FROM festivals WHERE id = $1", [festivalId]) as db_festival[];
-    return data.length > 0 ? data[0] : null;
+    try {
+        const data = await sql.query("SELECT * FROM festivals WHERE id = $1", [festivalId]) as db_festival[];
+        return data.length > 0 ? data[0] : null;
+    } catch {
+        return null;
+    }
 }
 
 export async function db_getFestivalWithImageByID(festivalId: db_festival_id) {
@@ -55,6 +63,8 @@ export async function db_getFestivalWithImageByID(festivalId: db_festival_id) {
                 user_contents ON festivals.image_id = user_contents.id
             WHERE 
                 festivals.id = $1
+            ORDER BY
+                festivals.created_at DESC
         `, [festivalId]) as db_festival_with_image[];
         return data.length > 0 ? data[0] : null;
     } catch {
@@ -80,6 +90,8 @@ export async function db_getArchivedFestivalsWithImage() {
             user_contents ON festivals.image_id = user_contents.id
         WHERE 
             festivals.is_archived = TRUE
+        ORDER BY
+            festivals.created_at DESC
     `) as db_festival_with_image[];
     return data;
 }
