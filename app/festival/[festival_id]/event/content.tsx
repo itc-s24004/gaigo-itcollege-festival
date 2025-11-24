@@ -1,8 +1,8 @@
 "use client";
 
 import { db_event } from "@/libs/db/db.type";
+import { Carousel } from "@/page_components/carousel";
 import { EventPoster } from "@/page_components/poster/event";
-import { SelectView } from "@/page_components/tool/select_view";
 import Link from "next/link";
 
 type PageContentProps = {
@@ -13,18 +13,11 @@ type PageContentProps = {
 export function PageContent({ events, showEntryPage }: PageContentProps) {
     return (
         <div>
-            <SelectView
-                options={
-                    events.map((event) => (
-                        {
-                            element: (
-                                <Link href={`./event/${event.id}`}>
-                                    <EventPoster data={event} showDescription={false} />
-                                </Link>
-                            )
-                        }
-                    ))
-                }
+            <Carousel
+                title="イベント一覧"
+                items={events.map((event) => (
+                    <EventPoster key={event.id} data={event} showDescription={false} link={`./event/${event.id}`} />
+                ))}
             />
             {showEntryPage && <Link href="./event/entry">イベント参加申請ページへ</Link>}
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { api_form_updateFestival } from "@/app/api/festival/update/client";
+import { api_setSiteSettings } from "@/app/api/site_settings/client";
 import { db_festival_with_image } from "@/libs/db/db.data"
 import { db_festival_id, db_user_content } from "@/libs/db/db.type";
 import { PlainButton } from "@/page_components/button/plain";
@@ -34,14 +35,15 @@ export function PageContent({ festival, current_festival, festival_image }: Page
         <>
             <MultiForm>
                 <PlainForm
+                    title="情報編集"
                     inputs={[
                         {
-                            label: "イベント名",
+                            label: "タイトル",
                             type: "input",
                             attr: {
                                 type: "text",
                                 name: "name",
-                                placeholder: "イベント名を入力してください",
+                                placeholder: "タイトルを入力してください",
                                 required: true,
                                 minLength: 3,
                                 maxLength: 32,
@@ -62,7 +64,7 @@ export function PageContent({ festival, current_festival, festival_image }: Page
                         },
                         {
                             type: "label",
-                            label: "イベント画像選択",
+                            label: "画像選択",
                         },
                         {
                             type: "custom",
@@ -76,14 +78,6 @@ export function PageContent({ festival, current_festival, festival_image }: Page
                                 name: "is_archived",
                                 defaultChecked: festival.is_archived
                             }
-                        },
-                        {
-                            type: "custom",
-                            node: (
-                                <PlainButton attributes={{disabled: true}}>
-                                    イベント削除
-                                </PlainButton>
-                            )
                         }
                     ]}
                     submitLabel="保存"
@@ -107,12 +101,21 @@ export function PageContent({ festival, current_festival, festival_image }: Page
                         }
                     }
                 />
-                <PlainForm
-                    submitLabel="トップページに表示"
-                    submitCallback={() => {
-
-                    }}
-                />
+                {
+                    festival.id !== current_festival &&
+                    <PlainForm
+                        submitLabel="トップページに表示"
+                        submitCallback={async () => {
+                            const result = await api_setSiteSettings("current_festival", festival.id);
+                            if (result) {
+                                alert("トップページに表示するように更新しました。");
+                            } else {
+                                alert("更新に失敗しました。");
+                            }
+                        }}
+                    />
+                }
+                
             </MultiForm>
             {
                 uploadScreen

@@ -21,6 +21,9 @@ export function PageContent({ event, event_image }: PageContentProps) {
             defaultSelected: event_image ? [event_image] : [],
             onSelect: (contents) => {
                 setSelectedImage(contents[0]);
+            },
+            customViewAttributes: {
+                style: {maxHeight: "400px", overflowY: "scroll"}
             }
         }
     );
@@ -57,7 +60,10 @@ export function PageContent({ event, event_image }: PageContentProps) {
                     },
                     {
                         label: "画像選択",
-                        type: "custom_input",
+                        type: "label"
+                    },
+                    {
+                        type: "custom",
                         node: main
                     }
 

@@ -30,29 +30,38 @@ export function PageContent({ festival_id }: PageContentProps) {
     return (
         <>
             <PlainForm
+                title="イベント登録フォーム"
                 inputs={[
                     {
                         label: "タイプ",
                         type: "select",
-                        options: Object.entries(db_event_type).map(([key, value]) => (
+                        options: [
                             {
-                                value: key,
-                                label: value
+                                label: "体験",
+                                value: db_event_type.experience
+                            },
+                            {
+                                label: "飲食",
+                                value: db_event_type.food
+                            },
+                            {
+                                label: "ステージ",
+                                value: db_event_type.stage
                             }
-                        )),
+                        ],
                         attr: {
                             name: "type",
                             placeholder: "タイプを選択してください",
-                            required: true,
+                            required: true
                         }
                     },
                     {
-                        label: "出展名",
+                        label: "イベント名",
                         type: "input",
                         attr: {
                             type: "text",
                             name: "name",
-                            placeholder: "出展名を入力してください",
+                            placeholder: "イベント名を入力してください",
                             required: true,
                             minLength: 3,
                             maxLength: 32
@@ -71,7 +80,7 @@ export function PageContent({ festival_id }: PageContentProps) {
                     },
                     {
                         type: "label",
-                        label: "出展画像選択",
+                        label: "イベント画像選択",
                     },
                     {
                         type: "custom",
@@ -90,10 +99,10 @@ export function PageContent({ festival_id }: PageContentProps) {
                     const event = await api_addEvent(festival_id, name, description, type, selectedImage?.id);
 
                     if (event) {
-                        alert("出展登録が完了しました。");
+                        alert("イベント登録が完了しました。");
                         redirect(`/festival/${festival_id}/event/${event[0].id}/editor`);
                     } else {
-                        alert("出展登録に失敗しました。");
+                        alert("イベント登録に失敗しました。");
                     }
                     setCanSubmit(true);
                 }}

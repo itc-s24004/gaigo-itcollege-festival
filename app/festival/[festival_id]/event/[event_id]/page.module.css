@@ -1,0 +1,54 @@
+
+
+
+.topContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    overflow: hidden;
+    background: transparent;
+}
+
+
+.topImage {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 600px;
+    width: 100%;
+    object-fit: cover;
+    object-position: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+}
+
+
+
+.title {
+    font-size: var(--font-large);
+    font-weight: bold;
+}
+
+.description {
+    font-size: var(--font-medium);
+
+    white-space: pre-wrap;
+
+}
+
+
+.textContainer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    margin: 20px auto;
+
+}
