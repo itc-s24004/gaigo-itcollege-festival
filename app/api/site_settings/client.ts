@@ -7,7 +7,8 @@ export async function api_setSiteSettings<T extends site_setting = SITE_SETTINGS
 
     const url = new URL("/api/site_settings", window.location.origin);
     const form = new FormData();
-    form.append(key.toString(), value.toString());
+    form.append("key", key.toString());
+    form.append("value", value.toString());
 
     return await fetch(url, {
         method: "PUT",

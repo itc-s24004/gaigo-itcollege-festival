@@ -18,8 +18,6 @@ export async function GET(req: NextRequest) {
     const offset = raw_offset ? Math.max(parseInt(raw_offset), 0) : 0;
 
 
-    console.log(raw_limit, raw_offset, type, limit, offset);
-
     const contents = await db_getUserContents(user.id, type ?? undefined, limit, offset);
 
     return NextResponse.json({ contents });
