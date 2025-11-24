@@ -9,11 +9,11 @@ import React from "react";
 type Options = {
     title?: string;
     inputs?: (
-        { label: string, attr: React.InputHTMLAttributes<HTMLInputElement>, type: "input" } |
-        { label: string, attr: React.InputHTMLAttributes<HTMLTextAreaElement>, type:  "textarea" } |
-        { label: string, attr: React.InputHTMLAttributes<HTMLSelectElement>, type: "select", options: { value: string; label: string }[] } |
-        { label: string, type: "custom_input", node: React.ReactNode } |
-        { label: string, type: "label"} |
+        { label?: string, attr: React.InputHTMLAttributes<HTMLInputElement>, type: "input" } |
+        { label?: string, attr: React.InputHTMLAttributes<HTMLTextAreaElement>, type:  "textarea" } |
+        { label?: string, attr: React.InputHTMLAttributes<HTMLSelectElement>, type: "select", options: { value: string; label: string }[] } |
+        { label?: string, type: "custom_input", node: React.ReactNode } |
+        { label?: string, type: "label"} |
         { type: "custom", node: React.ReactNode}
     )[];
     submitLabel?: string;

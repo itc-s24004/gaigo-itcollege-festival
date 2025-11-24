@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PlainForm } from "../plain";
 import { ImageListView } from "@/page_components/tool/image_view";
+import { PlainButton } from "@/page_components/button/plain";
 
 type Options = {
     onSubmit?: (formData: FormData) => Promise<void>;
@@ -8,6 +9,7 @@ type Options = {
 }
 export function Template_Form_ImageUpload({ onSubmit, customFormAttributes }: Options) {
     const [selectedImage, setSelectedImage] = useState<string[]>([]);
+    const [uploading, setUploading] = useState<boolean>(false);
     return (
         <PlainForm
             inputs={[
@@ -20,6 +22,7 @@ export function Template_Form_ImageUpload({ onSubmit, customFormAttributes }: Op
                         accept: "image/*",
                         required: true,
                         onChange: (ev) => {
+
                             if (ev.target.files) setSelectedImage([...ev.target.files].map(file => URL.createObjectURL(file)));
                         }
                     }
@@ -30,10 +33,21 @@ export function Template_Form_ImageUpload({ onSubmit, customFormAttributes }: Op
                     node: (
                         <ImageListView imageUrls={selectedImage}/>
                     )
+                },
+                {
+                    type: "custom",
+                    node: <PlainButton attributes={{disabled: uploading}}>{uploading ? "アップロード中..." : "アップロード"}</PlainButton>
                 }
             ]}
-            submitLabel="アップロード"
-            submitCallback={onSubmit}
+            submitCallback={
+                async (formData) => {
+                    if (onSubmit) {
+                        setUploading(true);
+                        await onSubmit(formData);
+                        setUploading(false);
+                    }
+                }
+            }
             customFormAttributes={customFormAttributes}
         >
         </PlainForm>

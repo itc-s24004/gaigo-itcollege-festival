@@ -1,0 +1,112 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    font-size: var(--font-medium);
+    font-weight: bold;
+}
+
+
+.moreLink {
+    font-size: var(--font-medium);
+    ::after {
+        content: "›";
+    }
+}
+
+
+.carouselContainer {
+    position: relative;
+    width: 100%;
+    
+
+    transition: all 0.3s ease;
+}
+
+.carousel {
+    position: relative;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    display: flex;
+
+    scroll-behavior: smooth;
+}
+
+.carousel::-webkit-scrollbar {
+    height: 8px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.carousel::-webkit-scrollbar-button {
+    display: none;
+}
+
+
+
+
+.carouselItem {
+    max-width: calc(100% / 4);
+    min-width: calc(100% / 4);
+    
+    box-sizing: border-box;
+    scroll-snap-align: start;
+}
+
+@media (max-width: 1100px) {
+    .carouselItem {
+        max-width: calc(100% / 3);
+        min-width: calc(100% / 3);
+        scroll-snap-align: center;
+    }
+}
+
+@media (max-width: 770px) {
+    .carouselItem {
+        max-width: calc(100% / 2);
+        min-width: calc(100% / 2);
+        scroll-snap-align: start;
+    }
+}
+
+
+
+
+
+
+.carouselButtonContainer {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+
+
+.carouselButton {
+    font-size: var(--font-large);
+    padding: 10px;
+    pointer-events: auto;
+
+    transition: background-color 0.3s ease;
+}
+
+
+.carouselButton:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.carouselButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+

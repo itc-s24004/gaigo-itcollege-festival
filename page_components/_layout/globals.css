@@ -4,7 +4,24 @@
     --body-bg: #ffffff;
     --background: #ededed;
     --foreground: #171717;
+
+
+    --font-x-large: 56px;
+    --font-large: 32px;
+    --font-medium: 20px;
+    --font-small: 14px;
 }
+
+
+@media (max-width: 768px) {
+    :root {
+        --font-x-large: 40px;
+        --font-large: 24px;
+        --font-medium: 18px;
+        --font-small: 12px;
+    }
+}
+
 
 @theme inline {
     --color-background: var(--background);
@@ -40,7 +57,7 @@ body {
     flex: 1;
 
     background: var(--background);
-    max-width: 1600px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 20px;
 }

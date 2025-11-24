@@ -235,7 +235,7 @@ export function UserImageView( {  customOptions = [], defaultSelected = [], mult
     const [upload, setUpload] = useState<boolean>(false);
     
 
-    const [selectedImages, setSelectedImages] = useState<number[]>(defaultSelected ? (multiple ? defaultSelected.map((_, i) => i) : [0]) : []);
+    const [selectedImages, setSelectedImages] = useState<number[]>(defaultSelected.length ? (multiple ? defaultSelected.map((_, i) => i) : [0]) : []);
 
     const main = (
         <div className={styles.user_contents_view_container} {...customAttributes}>
@@ -329,7 +329,6 @@ export function UserImageView( {  customOptions = [], defaultSelected = [], mult
 
                     const result = await api_uploadUserContent(file);
                     if (result) {
-                        alert("アップロード成功: " + result.content.url);
                         setUploadedImages([...uploadedImages, result.content]);
                         setLoadedImages([...loadedImages, result.content]);
                         setUpload(false);

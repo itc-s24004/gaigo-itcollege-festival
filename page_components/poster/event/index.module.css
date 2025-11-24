@@ -9,13 +9,13 @@
 
 
 .posterTitle {
-    font-size: 1.5em;
+    font-size: var(--font-medium);
     white-space: no-wrap;
     font-weight: bold;
 }
 
 .posterDescription {
-    font-size: 1.2em;
+    font-size: var(--font-small);
     color: #555;
     line-height: 1.6;
 }

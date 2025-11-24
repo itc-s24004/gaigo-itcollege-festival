@@ -9,8 +9,7 @@ export function AccountButton({isLoggedIn, icon}: {isLoggedIn: boolean, icon: st
             {
                 isLoggedIn ? (
                     <div className={styles.accountButton}>
-                        <Image src={icon ?? "/default-avatar.png"} alt={""} width={48} height={48}  className={styles.icon}/>
-                        <span>ログイン済み</span>
+                        <Image src={icon ?? "/default/avatar.png"} alt={""} width={48} height={48}  className={styles.icon}/>
                     </div>
                 ) : (
                     <div className={styles.accountButton}>

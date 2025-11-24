@@ -5,14 +5,14 @@
     /* form {
         border-top: none;
     } */
-    >:first-child {
+    >:first-child:not(:last-of-type) {
         border-bottom: none;
     }
     >:not(:first-of-type):not(:last-of-type) {
         border-top: none;
         border-bottom: none;
     }
-    >:last-child {
+    >:last-child:not(:first-of-type) {
         border-top: none;
     }
 }

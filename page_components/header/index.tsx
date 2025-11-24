@@ -12,7 +12,9 @@ export const Header = ({festival_id, isLoggedIn, icon}: {festival_id: db_festiva
 
     return <header className={styles.header}>
         <div className={styles.leftSection}>
-            <h1 className={styles.title}>ガイカレ祭り</h1>
+            <Link href="/">
+                <h1 className={styles.title}>ガイカレ祭り</h1>
+            </Link>
             <div className={styles.menuButton} onClick={() => setMenuOpen(!menuOpen)}>
                 &#9776;
                 {/* 展開ボタン */}

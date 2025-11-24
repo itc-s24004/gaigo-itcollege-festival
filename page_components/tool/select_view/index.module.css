@@ -8,12 +8,14 @@
 }
 
 .option {
+    display: flex;
+    flex-direction: column;
     cursor: pointer;
     user-select: none;
     transition: background-color 0.3s, color 0.3s;
 
-    margin: auto;
-
+    justify-content: center;
+    align-items: center;
 }
 
 .option.selected {
