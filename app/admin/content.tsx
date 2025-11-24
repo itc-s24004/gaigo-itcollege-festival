@@ -1,10 +1,9 @@
 "use client";
 
 import { db_festival_with_image } from "@/libs/db/db.data";
+import { Carousel } from "@/page_components/carousel";
 import { FestivalPoster } from "@/page_components/poster/festival";
-import { SelectView } from "@/page_components/tool/select_view";
 import { site_setting } from "@/site_settings";
-import Link from "next/link";
 
 type PageContentProps = {
     settings: site_setting;
@@ -19,53 +18,30 @@ export function PageContent({ settings, festivals }: PageContentProps) {
         <div>
             <h1>管理者ページ</h1>
             {
-                <SelectView 
-                    options={
+                <Carousel 
+                    title="祭り一覧"
+                    items={
                         festivals.map((festival, index) => (
-                            {
-                                element: (
-                                    <Link href={`/festival/${festival.id}/editor`}>
-                                        <FestivalPoster key={index} data={festival} customAttributes={{style: { boxShadow: "none"}}}/>
-                                    </Link>
-                                )
-                            }
+                            <FestivalPoster
+                                key={festival.id}
+                                link={`/festival/${festival.id}/editor`}
+                                data={festival} 
+                                showDescription={false}
+                                customAttributes={
+                                    {style: {
+                                        boxShadow: "none",
+                                        borderColor: festival.is_archived ? "red" : "gray",
+                                        backgroundColor: index === selectedFestival ? "lightblue" : "",
+                                        // outline: index === selectedFestival ? "2px solid blue" : "none"
+                                    }}
+                                }
+                            />
                         ))
                     }
-                    optionGenerator={(i) => {
-                        const isSelected = selectedFestival === i;
-                        const defaultStyle: React.HTMLAttributes<HTMLDivElement>["style"] = {
-                            width: "300px"
-                        };
-                        if (isSelected) {
-                            return {
-                                style: {
-                                    ...defaultStyle
-                                }
-                            };
-                        } else {
-                            return {
-                                style: defaultStyle
-                            };
-                        }
-                    }}
-                    selected={selectedFestival === null ? [] : [selectedFestival]}
-                >
-
-                </SelectView>
-                
+                    moreLabel="作成"
+                    moreLink="/festival/create"
+                />
             }
-            {/* {
-                selectedFestival !== null && (
-                    <Image 
-                        src={
-                            festivals[selectedFestival].image ? festivals[selectedFestival].image : "/no_image.png"
-                        }
-                        alt={""} 
-                        width={400} 
-                        height={400}
-                    />
-                )
-            } */}
             {
                 Object.entries(settings).map(([key, value], index) => (
                     <div key={index}>

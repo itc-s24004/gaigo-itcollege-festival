@@ -1,28 +1,12 @@
-.titleContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
 
-.title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
+.container {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 
-.tree {
-    padding-left: 20px;
-    li:not(:has(ul)) a {
-        color: blue;
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
     }
-    li:hover {
-        background-color: white;
-    }
-}
-
-.tree:hover {
-    background-color: rgba(0, 0, 0, 0.05);
 }
