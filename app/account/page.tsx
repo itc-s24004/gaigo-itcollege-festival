@@ -3,6 +3,7 @@ import { signInAction, signOutAction } from "@/page_components/auth/action";
 import { GoogleAuthBtn } from "@/page_components/auth/google";
 import { MultiForm } from "@/page_components/form/multi_form";
 import { PlainForm } from "@/page_components/form/plain";
+import Link from "next/link";
 
 
 export const metadata = {
@@ -97,6 +98,9 @@ export default async function Page() {
     );
     
     return (
-        mainFrame
+        <>
+            {mainFrame}
+            <Link href={"/troubleshooting/login"} >ログインに失敗する場合</Link>
+        </>
     );
 }
