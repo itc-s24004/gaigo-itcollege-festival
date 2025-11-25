@@ -20,8 +20,11 @@ export function PageContent() {
                     <Image src={"/error/login3.png"} alt={"Cookie削除方法3"} width={400} height={300} />
                 </li>
                 <li>
-                    accounts.google.comのデータを削除
+                    保存されているデータをすべて削除
                     <Image src={"/error/login4.png"} alt={"Cookie削除方法4"} width={400} height={300} />
+                </li>
+                <li>
+                    ブラウザを再起動し、再度ログインをお試しください。
                 </li>
             </ul>
         </div>
