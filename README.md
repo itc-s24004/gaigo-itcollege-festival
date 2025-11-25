@@ -1,29 +1,28 @@
 # ガイカレ 紹介 管理サイト
 
 ## ディレクトリ構成
-- app
-    - account / ユーザーアカウントに関するページ
-        - [account_id] / 特定アカウント
-            - contents 
-            - 
-        - contents / ユーザーがアップロードしたファイル一覧
-    -admin / 管理者用ページ
-    - api / apiエンドポイントとクライアント用の関数
-    - archive / 過去の祭り
-    - festival / 
-        - [festival_id] / 祭りの詳細ページ
-            - editor / 管理ページ
-            - event / イベント一覧
-                - [event_id] / イベントの詳細
-                    - editor / 管理ページ
-                    - item / イベントのアイテム一覧
-                        - [item_id] / アイテムの詳細ページ
-                            - editor / 管理ページ
-                - entry / 出展登録ページ
-    
-- libs / サーバーサイド用の関数など
-- page_components / ページコンポーネント
-- public / サイト全体の画像など
+```
+.app
+├─ account / ユーザーアカウントに関するページ
+│├─ [account_id] / 特定アカウント
+│└─ contents / ユーザーがアップロードしたファイル一覧
+├─ admin / 管理者用ページ
+├─ api / apiエンドポイントとクライアント用の関数
+├─ archive / 過去の祭り
+├─ festival /
+│└─ [festival_id] / 祭りの詳細ページ
+│  ├─ editor / 管理ページ
+│  └─ event / イベント一覧
+│    ├─ entry / イベント登録ページ
+│    └─ [event_id] / イベントの詳細
+│      ├─ editor / 管理ページ
+│      └─ item / イベントのアイテム一覧
+│        └─ [item_id] / アイテムの詳細ページ
+│          └─ editor / 管理ページ
+├ libs / サーバーサイド用の関数など
+├ page_components / ページコンポーネント
+└ public / サイト全体の画像など
+```
 
 
 ## env
