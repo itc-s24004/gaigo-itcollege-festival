@@ -101,6 +101,8 @@ export default async function Page() {
         <>
             {mainFrame}
             <Link href={"/troubleshooting/login"} >ログインに失敗する場合</Link>
+            <br />
+            <Link href={"/account/events"}>イベント管理ページへ</Link>
         </>
     );
 }
