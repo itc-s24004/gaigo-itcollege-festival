@@ -16,10 +16,8 @@ export function PageContent() {
         {
             canReload: false,
             canUpload: true,
+            scrollView: true,
             onSelect: (contents) => setSelectedImage(contents[0]),
-            customViewAttributes: {
-                style: {maxHeight: "400px", overflowY: "scroll"}
-            }
         }
     );
     return (

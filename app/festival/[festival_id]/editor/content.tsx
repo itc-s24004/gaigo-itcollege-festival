@@ -4,7 +4,6 @@ import { api_form_updateFestival } from "@/app/api/festival/update/client";
 import { api_setSiteSettings } from "@/app/api/site_settings/client";
 import { db_festival_with_image } from "@/libs/db/db.data"
 import { db_festival_id, db_user_content } from "@/libs/db/db.type";
-import { PlainButton } from "@/page_components/button/plain";
 import { MultiForm } from "@/page_components/form/multi_form";
 import { PlainForm } from "@/page_components/form/plain";
 import { UserImageView } from "@/page_components/tool/user_image_view";
@@ -25,10 +24,8 @@ export function PageContent({ festival, current_festival, festival_image }: Page
             defaultSelected: festival_image ? [festival_image] : [],
             canReload: false,
             canUpload: true,
+            scrollView: true,
             onSelect: (contents) => setSelectedImage(contents[0]),
-            customViewAttributes: {
-                style: {maxHeight: "400px", overflowY: "scroll"}
-            }
         }
     );
     return (

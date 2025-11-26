@@ -1,29 +1,34 @@
 "use client";
 
-import { db_event, db_user_content } from "@/libs/db/db.type";
+import { api_form_updateEvent } from "@/app/api/festival/event/update/client";
+import { db_event_item_with_image } from "@/libs/db/db.data";
+import { db_event, db_event_type, db_user_content } from "@/libs/db/db.type";
+import { Carousel } from "@/page_components/carousel";
 import { PlainForm } from "@/page_components/form/plain";
+import { ItemPoster } from "@/page_components/poster/item";
 import { UserImageView } from "@/page_components/tool/user_image_view";
 import { useState } from "react";
 
 type PageContentProps = {
     event: db_event;
     event_image?: db_user_content;
+    items: db_event_item_with_image[];
 }
 
-export function PageContent({ event, event_image }: PageContentProps) {
+export function PageContent({ event, event_image, items }: PageContentProps) {
     const [selectedImage, setSelectedImage] = useState<db_user_content | undefined>(event_image);
+
+    const [canSubmit, setCanSubmit] = useState<boolean>(true);
     
     const {main, uploadScreen} = UserImageView(
         {
             multiple: false,
             canUpload: true,
             canReload: true,
+            scrollView: true,
             defaultSelected: event_image ? [event_image] : [],
             onSelect: (contents) => {
                 setSelectedImage(contents[0]);
-            },
-            customViewAttributes: {
-                style: {maxHeight: "400px", overflowY: "scroll"}
             }
         }
     );
@@ -35,6 +40,30 @@ export function PageContent({ event, event_image }: PageContentProps) {
             <PlainForm 
                 title={`イベント編集: ${event.name}`}
                 inputs={[
+                    {
+                        label: "タイプ",
+                        type: "select",
+                        options: [
+                            {
+                                label: "体験",
+                                value: db_event_type.experience
+                            },
+                            {
+                                label: "飲食",
+                                value: db_event_type.food
+                            },
+                            {
+                                label: "ステージ",
+                                value: db_event_type.stage
+                            }
+                        ],
+                        attr: {
+                            name: "type",
+                            placeholder: "タイプを選択してください",
+                            required: true,
+                            defaultValue: event.type
+                        }
+                    },
                     {
                         label: "イベント名",
                         type: "input",
@@ -70,13 +99,33 @@ export function PageContent({ event, event_image }: PageContentProps) {
                 ]}
                 submitLabel="保存"
                 submitCallback={async (formData) => {
+                    formData.append("event_id", event.id);
                     if (selectedImage) formData.append("image_id", selectedImage.id);
-                    // !!!apiを作成後実装 変更処理
+
+                    setCanSubmit(false);
+
+                    const res = await api_form_updateEvent(formData);
+                    if (res) {
+                        alert("イベント情報を更新しました。");
+                    } else {
+                        alert("イベント情報の更新に失敗しました。");
+                    }
+                    setCanSubmit(true);
                     
+                }}
+                customSubmitButtonAttributes={{
+                    disabled: !canSubmit
                 }}
             />
             {uploadScreen}
-            
+            <Carousel 
+                title="イベント商品一覧"
+                items={
+                    items.map((item, index) => <ItemPoster key={index} data={item} link={`/festival/${event.festival_id}/event/${event.id}/item/${item.id}/editor`} />)
+                }
+                moreLabel="商品を追加"
+                moreLink={`/festival/${event.festival_id}/event/${event.id}/item/create`}
+            />
         </div>
     )
 }
