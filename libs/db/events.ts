@@ -2,7 +2,7 @@
 
 import { sql } from "./db";
 import { db_event_with_image } from "./db.data";
-import { db_festival_id, db_event, db_event_id, db_event_type, db_user_id } from "./db.type";
+import { db_festival_id, db_event, db_event_id, db_event_type, db_user_id, db_user_content_id } from "./db.type";
 
 export async function db_addEvent(festival_id: db_festival_id, owner_id: string, type: db_event_type, name: string, description: string, image?: string) {
     const data = await sql.query("INSERT INTO events (festival_id, owner_id, type, name, description, image_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", [festival_id, owner_id, type, name, description, image]) as db_event[];
@@ -106,4 +106,11 @@ export async function db_getEventsWithImageByOwnerID(ownerId: db_user_id) {
             events.owner_id = $1
     `, [ownerId]) as db_event_with_image[];
     return data;    
+}
+
+
+// イベント更新▼
+export async function db_updateEvent(eventId: db_event_id, name: string, description: string, type: db_event_type, imageId: db_user_content_id | null) {
+    const data = await sql.query("UPDATE events SET name = $1, description = $2, type = $3, image_id = $4 WHERE id = $5 RETURNING *", [name, description, type, imageId, eventId]) as db_event[];
+    return data;
 }
