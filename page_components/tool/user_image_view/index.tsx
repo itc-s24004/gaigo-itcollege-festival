@@ -190,11 +190,13 @@ type UserImageViewOptions = {
     canUpload?: boolean;
     canReload?: boolean;
 
+    scrollView?: boolean;
+
 
     customAttributes?: React.HTMLAttributes<HTMLDivElement>;
     customViewAttributes?: React.HTMLAttributes<HTMLDivElement>;
 }
-export function UserImageView( {  customOptions = [], defaultSelected = [], multiple = false, onSelect, canUpload = false, canReload = false, customAttributes, customViewAttributes } : UserImageViewOptions) {
+export function UserImageView( {  customOptions = [], defaultSelected = [], multiple = false, onSelect, canUpload = false, canReload = false, scrollView = false, customAttributes, customViewAttributes } : UserImageViewOptions) {
     const [firstLoad, setFirstLoad] = useState<boolean>(true);
 
 
@@ -269,7 +271,7 @@ export function UserImageView( {  customOptions = [], defaultSelected = [], mult
                     }
                 }
                 selected={selectedImages}
-                customAttributes={customViewAttributes}
+                customAttributes={{...customViewAttributes, style: scrollView ? { ...customViewAttributes?.style, maxHeight: "400px", overflowY: "scroll" } : { ...customViewAttributes?.style }}}
             />
 
             <div className={styles.action_buttons_container}>

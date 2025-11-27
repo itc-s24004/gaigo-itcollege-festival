@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export function ErrorContent({title, message}: {title: string, message: string}) {
+export function ErrorContent({title="エラー", message="このページを表示できません"}: {title?: string, message?: string}) {
     return (
         <div>
             <h1>{title}</h1>
