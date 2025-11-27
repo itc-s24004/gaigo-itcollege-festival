@@ -85,8 +85,8 @@ export type db_event_item = {
 
     name: string;
     description: string;
+    price: number;
     image_id?: db_user_content_id;
-    price?: number;
 }
 // 商品情報▲
 
