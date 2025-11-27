@@ -22,7 +22,10 @@ create table festivals (
     description varchar(256) not null,
     image_id uuid references user_contents(id) on delete set null,
     is_archived boolean default false not null,
-    created_at timestamp with time zone default now() not null
+    created_at timestamp with time zone default now() not null,
+
+    start_time timestamp with time zone not null,
+    end_time timestamp with time zone not null
 );
 
 
@@ -35,31 +38,33 @@ create type event_types as enum (
 
 create table events (
     id uuid primary key default gen_random_uuid(),
-    festival_id uuid references festivals(id) not null,
+    festival_id uuid references festivals(id) on delete cascade not null,
     owner_id uuid references users(id) not null,
     type event_types not null,
 
     name varchar(32) not null,
     description varchar(256) not null,
-    image_id uuid references user_contents(id) on delete set null
+    image_id uuid references user_contents(id) on delete set null,
+
+    start_time timestamp with time zone not null
 );
 
 
 
 create table event_items (
     id uuid primary key default gen_random_uuid(),
-    event_id uuid references events(id) not null,
-
+    event_id uuid references events(id) on delete cascade not null,
+    
     name varchar(32) not null,
     description varchar(256) not null,
     image_id uuid references user_contents(id) on delete set null,
-    price integer
+    price integer not null
 );
 
 
 create table event_users (
     id uuid primary key default gen_random_uuid(),
-    event_id uuid references events(id) not null,
+    event_id uuid references events(id) on delete cascade not null,
     user_id uuid references users(id) not null
 );
 
@@ -88,7 +93,9 @@ create table user_contents (
 
     url varchar(256) unique not null,
     type varchar(32) not null,
-    created_at timestamp with time zone default now() not null
+    
+    created_at timestamp with time zone default now() not null,
+    is_deleted boolean default false not null
 );
 
 
@@ -100,6 +107,7 @@ create table posts (
 
     content varchar(256) not null,
     image_id uuid references user_contents(id) on delete set null,
+
     created_at timestamp with time zone default now() not null,
     is_deleted boolean default false not null
 );
