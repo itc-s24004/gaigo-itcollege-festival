@@ -63,3 +63,4 @@ BLOB_READ_WRITE_TOKEN=vercelblob
 - イベントスタッフの招待機能
 - ページ全体のコンポーネントの整理
 - ユーザー管理機能
+- 全体の null と undefined をどちらかに統一
